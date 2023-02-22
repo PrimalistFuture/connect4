@@ -19,18 +19,17 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
 
 function makeBoard() {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
-  const boardFrame = [];
 
   for (let i = 0; i < HEIGHT; i++) {
-    const heightArray = [];
+    const row = [];
     for (let j = 0; j < WIDTH; j++) {
-      heightArray.push([]);
+      row.push(null);
     }
 
-    boardFrame.push(heightArray);
+    board.push(row);
   }
 
-  return board = boardFrame;
+  return board;
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
@@ -44,8 +43,11 @@ function makeHtmlBoard() {
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
 
-  // TODO:
-  for (var x = 0; x < WIDTH; x++) {
+  // TODO:fix the var and add docstring
+  /** creating the top row to handle clicks and eventually drop game pieces
+   * adds id with dynamic name
+   */
+  for (let x = 0; x < WIDTH; x++) {
     const headCell = document.createElement("td");
     headCell.setAttribute("id", `headCell${x}`);
     top.append(headCell);
@@ -64,7 +66,8 @@ function makeHtmlBoard() {
       const cell = document.createElement('td');
       // TODO: add an id, c-y-x, to the above table cell element
       // you'll use this later, so make sure you use c-y-x
-      cell.setAttribute('id', 'c-y-x');
+      // TODO: change the id to update dynamically
+      cell.setAttribute('id', `c${y}-${x}`);
       // TODO: append the table cell to the table row
       row.append(cell);
     }
