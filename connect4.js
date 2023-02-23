@@ -67,7 +67,7 @@ function makeHtmlBoard() {
       // TODO: add an id, c-y-x, to the above table cell element
       // you'll use this later, so make sure you use c-y-x
       // TODO: change the id to update dynamically
-      cell.setAttribute('id', `c${y}-${x}`);
+      cell.setAttribute('id', `c-${y}-${x}`);
       // TODO: append the table cell to the table row
       row.append(cell);
     }
@@ -81,7 +81,7 @@ function makeHtmlBoard() {
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 5
   let yCoordinate = 0;
-  let nextGamePiece = document.getElementById(`c${y + 1}-${x}`);
+  let nextGamePiece = document.getElementById(`c-${y + 1}-${x}`);
   for (let i = HEIGHT - 1; i >= 0; i--) {
     if (nextGamePiece.classList.contains('filled')) {
       yCoordinate = y;
@@ -97,10 +97,11 @@ function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
   const gamePiece = document.createElement('div');
   gamePiece.classList.add('piece', `p${currPlayer}`);
-  let square = document.getElementById(`c${y}-${x}`);
+  console.log('gamePiece:', gamePiece);
+  let square = document.getElementById(`c-${y}-${x}`);
+  console.log('square:', square);
   square.appendChild(gamePiece);
   square.classList.add('filled');
-
 }
 
 /** endGame: announce game end */
