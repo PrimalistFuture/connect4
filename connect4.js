@@ -80,7 +80,14 @@ function makeHtmlBoard() {
 
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 5
-  return 5;
+  let yCoordinate = 0;
+  let nextGamePiece = document.getElementById(`c${y+1}-${x}`);
+  while (!nextGamePiece.classList.contains('filled')) {
+    y++
+  }
+  yCoordinate = y;
+
+
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
@@ -88,8 +95,11 @@ function findSpotForCol(x) {
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
   const gamePiece = document.createElement('div');
-  gamePiece.classList.add('piece', `p${currPlayer}`);  //  <---------- CHANGE HARD-CODED p1 CLASS!!!
-  return gamePiece;
+  gamePiece.classList.add('piece', `p${currPlayer}`);
+  let square = document.getElementById(`c${y}-${x}`);
+  square.appendChild(gamePiece);
+  square.classList.add('filled');
+
 }
 
 /** endGame: announce game end */
