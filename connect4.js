@@ -81,13 +81,14 @@ function makeHtmlBoard() {
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 5
   let yCoordinate = 0;
-  let nextGamePiece = document.getElementById(`c${y+1}-${x}`);
-  while (!nextGamePiece.classList.contains('filled')) {
-    y++
+  let nextGamePiece = document.getElementById(`c${y + 1}-${x}`);
+  for (let i = HEIGHT - 1; i >= 0; i--) {
+    if (nextGamePiece.classList.contains('filled')) {
+      yCoordinate = y;
+      return yCoordinate;
+    }
   }
-  yCoordinate = y;
-
-
+  return null;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
@@ -111,11 +112,12 @@ function endGame(msg) {
 /** handleClick: handle click of column top to play piece */
 
 function handleClick(evt) {
-  // get x from ID of clicked cell
-  var x = +evt.target.id;
+  // get x from ID of clicked
+  const x = +(evt.target.id.slice(-1));
+  console.log(x);
 
   // get next spot in column (if none, ignore click)
-  var y = findSpotForCol(x);
+  const y = findSpotForCol(x);
   if (y === null) {
     return;
   }
